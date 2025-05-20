@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
+import lombok.*;
 import java.util.List;
+
 
 @Data
 @Entity
@@ -50,10 +51,12 @@ public class Client {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "entreprise_id", nullable = false)
-    private Entreprise entreprise;
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Facture> factures;
+    private List<Facture> factures ;
+
+
 }

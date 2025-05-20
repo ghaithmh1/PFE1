@@ -45,9 +45,8 @@ public class Utilisateur implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "entreprise_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id")
     private Entreprise entreprise;
 
     @JsonBackReference
@@ -57,6 +56,11 @@ public class Utilisateur implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == null) {
+            return List.of();
+
+
+        }
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
@@ -64,6 +68,7 @@ public class Utilisateur implements UserDetails {
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public String getUsername() {
@@ -89,4 +94,6 @@ public class Utilisateur implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

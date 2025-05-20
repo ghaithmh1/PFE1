@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
 import java.util.List;
 
 @Data
@@ -31,17 +30,14 @@ public class Account {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Utilisateur> utilisateurs;
+    private List<Utilisateur> utilisateurs ;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Article> articles;
+    private List<Article> articles ;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Fournisseur> fournisseurs;
 
-    @ManyToOne
-    @JoinColumn(name = "entreprise_id", nullable = false)
-    private Entreprise entreprise;
 }

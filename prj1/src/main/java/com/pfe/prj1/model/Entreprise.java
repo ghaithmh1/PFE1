@@ -3,7 +3,6 @@ package com.pfe.prj1.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,6 +57,7 @@ public class Entreprise {
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Utilisateur> utilisateurs = new ArrayList<>();
 
+    // Constructeurs
     public Entreprise() {
         this.uuid = UUID.randomUUID().toString();
         this.dateCreated = new Date();
@@ -70,6 +70,7 @@ public class Entreprise {
         this.nom = nom;
     }
 
+    // Méthodes
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         utilisateurs.add(utilisateur);
         utilisateur.setEntreprise(this);
